@@ -2,7 +2,7 @@
 <html lang="pt-br">
     <head>
         <meta charset="UTF-8">
-        <title>HobbyShare - Seja bem-vindo!</title>
+        <title>HobbyShare - Login</title>
         <link rel="stylesheet" href="reset.css">
         <link rel="stylesheet" href="pagina-inicial.css">
         <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -12,13 +12,18 @@
     <body>
         <header class="cabecalho">
             <h1>HobbyShare</h1>
+            <p>Faça o login</p>
         </header>
 
         <main>
-            <div class="botoes">
-                <button class="login">Login</button>
-                <button class="registrar">Registrar</button>
-            </div>
+            <form>
+                <label for="email">Email</label>
+                <input type="email" id="email" class="input-padrao" required placeholder="seuemail@dominio.com">
+                
+                <label for="senha">Senha</label>
+                <input type="password" id="senha" class="input-padrao">
+
+                <input type="submit" value="Entrar" class="enviar">
         </main>
 
         <footer>
