@@ -1,0 +1,48 @@
+* {
+    font-family: 'Comfortaa', cursive;
+}
+
+.cabecalho {
+    background-color: #4314A8;
+    text-align: center;
+    font-family: 'Comfortaa', cursive;
+    color: #fff;
+}
+
+.cabecalho .p-3 {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 35px;
+    margin-left: 60px;
+}
+
+.btn-outline-light {
+    margin-left: 45px;
+    padding: 15px 35px;
+    height: 3rem;
+    text-shadow: 2px 2px 2px #808080;
+}
+
+main{
+    height: 100vh;
+    background-image:url("./assets/fotografo.jpg");
+    background-size: cover;
+}
+
+main .text-fade {
+    color: #fff;
+    width: 400px;
+    text-shadow: 3px 3px 3px #333;
+    text-wrap:normal;
+}
+
+footer{
+    height: 10vh;
+    background-color: #000;
+    color: #fff;
+    text-align: center;
+    display:flex;
+    align-items:center;
+    justify-content: center;
+}
