@@ -1,0 +1,16 @@
+mat-toolbar {
+    background-color: purple;
+    display: flex;
+    justify-content: space-between;
+    padding: 0 64px;
+    a {
+        text-decoration: none;
+        color: white;
+        &.active-link {
+            color: red;
+        }
+        span {
+            margin-left: 24px;
+        }
+    }
+}

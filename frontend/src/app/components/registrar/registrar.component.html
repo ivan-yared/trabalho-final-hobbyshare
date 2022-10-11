@@ -1,0 +1,17 @@
+<form [formGroup]="registrarForm" (ngSubmit)="registrar()" novalidate>
+    <mat-form-field>
+        <mat-label>Nome completo</mat-label>
+        <input matInput placeholder="Exemplo: João da Silva" formControlName = "name">
+    </mat-form-field>
+    <mat-form-field>
+        <mat-label>Email</mat-label>
+        <input matInput type="email" placeholder="Exemplo: joao@provedor.com" formControlName = "email">
+    </mat-form-field>
+    <mat-form-field>
+        <mat-label>Senha</mat-label>
+        <input matInput type="password" formControlName = "password">
+    </mat-form-field>
+    <button color="accent" [disabled]="!registrarForm.valid" mat-raised-button type="submit">
+        <span>Registrar</span>
+    </button>
+</form>
