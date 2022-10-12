@@ -3,16 +3,17 @@ import { FormControl } from '@angular/forms';
 import { FormGroup } from '@angular/forms';
 import { Validators } from '@angular/forms';
 
+import { AuthService } from 'src/app/services/auth.service';
+
 @Component({
   selector: 'app-registrar',
   templateUrl: './registrar.component.html',
   styleUrls: ['./registrar.component.scss']
 })
 export class RegistrarComponent implements OnInit {
-
   registrarForm: FormGroup;
 
-  constructor() { }
+  constructor(private authService: AuthService) { }
 
   ngOnInit(): void {
     this.registrarForm = this.createFormGroup();
@@ -27,8 +28,8 @@ export class RegistrarComponent implements OnInit {
     })
   }
 
-  registrar(): void {
-    console.log(this.registrarForm.value)
+  signup(): void {
+    this.authService.signup(this.registrarForm.value).subscribe((msg) => console.log(msg));
   }
 
 }
