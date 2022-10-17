@@ -19,7 +19,7 @@ export function Home() {
         <div>
             <main>
                 <div className="botoes container-fluid">
-                    <div className="text-fade py-5">
+                    <div className="text-fade py-5" data-aos="fade-left" data-aos-duration="1500">
                         <h1 className="mx-3 h1">A arte do compartilhamento.</h1>
                         <h5 className="mx-3 h5"> Junte-se agora mesmo a uma comunidade de entusiastas de diversos tipos!</h5>
                         <button type="button" className="mx-3 login btn btn-outline-light" onClick={navigateToLogin}>Login</button>
