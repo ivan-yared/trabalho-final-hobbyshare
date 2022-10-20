@@ -1,15 +1,18 @@
 import { auth, firebase } from '../services/firebase'
+import { useNavigate } from 'react-router-dom';
+import { useAuth } from '../hooks/useAuth';
 
 export function Login () {
-    function authLoginGoogle () {
-        const provider = new firebase.auth.GoogleAuthProvider
-        auth.signInWithPopup(provider).then(result => {
-            console.log(result);
-        })
-    }
+    const navigate = useNavigate();
+    const { user, signInWithGoogle } = useAuth();
 
-    function authLoginEmail () {
-        const provider = new firebase.auth.EmailAuthProvider
+    async function authLoginGoogle () {
+        if (!user) {
+            await signInWithGoogle();
+        }
+
+        let path = '/feed';
+        navigate(path);
     }
 
     return (

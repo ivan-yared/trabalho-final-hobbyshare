@@ -1,9 +1,20 @@
 import { useNavigate } from 'react-router-dom';
-
 import '../styles/pagina-inicial.css';
+import { useAuth } from '../hooks/useAuth';
 
 export function Home() {
     const navigate = useNavigate();
+    const { user, signInWithGoogle } = useAuth();
+
+    async function authLoginGoogle () {
+        let path = '/feed';
+        if (user) {
+            navigate(path);
+        }
+        else {
+            await signInWithGoogle();
+        }
+    }
 
     function navigateToLogin () {
         let path = '/login';

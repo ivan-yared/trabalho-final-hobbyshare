@@ -1,4 +1,8 @@
+import { useAuth } from '../hooks/useAuth';
+
 export function Registrar () {
+    const { user, signInWithGoogle } = useAuth();
+
     return (
         <div>
             <main>
