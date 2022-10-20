@@ -5,11 +5,14 @@ import { Perfil } from "./pages/perfil";
 import { Feed } from "./pages/feed";
 import { BrowserRouter, Route, Routes } from 'react-router-dom'
 import { AuthContextProvider } from "./contexts/AuthContext"
+import { Header } from "./components/header";
+import { Footer } from "./components/footer";
 
 function App() {
   return (
     <BrowserRouter>
       <AuthContextProvider>
+        <Header></Header>
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/login" element={<Login />} />
@@ -17,6 +20,7 @@ function App() {
           <Route path="/perfil" element={<Perfil />} />
           <Route path="/feed" element={<Feed />} />
         </Routes>
+        <Footer></Footer>
       </AuthContextProvider>
     </BrowserRouter>
   );
