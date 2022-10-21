@@ -6,6 +6,11 @@ export function Login () {
     const navigate = useNavigate();
     const { user, signInWithGoogle } = useAuth();
 
+    let path = '/feed';
+    if (user) {
+        navigate(path);
+    }
+
     async function authLoginGoogle () {
         if (!user) {
             await signInWithGoogle();
