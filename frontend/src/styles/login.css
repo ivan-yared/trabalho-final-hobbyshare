@@ -1,0 +1,37 @@
+* {
+    font-family: 'Comfortaa', cursive;
+    box-sizing: border-box;
+}
+
+.card-body{
+    background-color: #4314A8;
+    border-radius: 5px;
+    border-color: transparent;
+    color: #fff;
+    text-align: center;
+}
+
+.card-body input[type=email], input[type=password]{
+    width: 25rem;
+}
+
+.enviar, button{
+    background-color: #4314A8;
+    border-color: #fff;
+    border: 1px solid;
+    border-radius: 5px;
+}
+
+main{
+    background-color: #fff;
+}
+
+.loginButton{
+    gap: 5px;
+}
+
+input{
+    background-color: #4314A8;
+    border: 1px solid #fff;
+    border-radius: 5px;
+}
