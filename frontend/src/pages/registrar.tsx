@@ -1,7 +1,14 @@
 import { useAuth } from '../hooks/useAuth';
+import { useNavigate } from 'react-router-dom';
 
 export function Registrar () {
+    const navigate = useNavigate();
     const { user, signInWithGoogle } = useAuth();
+
+    let path = '/feed';
+    if (user) {
+        navigate(path);
+    }
 
     return (
         <div>
