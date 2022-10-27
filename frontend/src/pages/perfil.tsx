@@ -11,6 +11,10 @@ export function Perfil () {
     }
 
     return (
-        <h1>Seja bem-vindo ao seu perfil!</h1>
+        <div className="user-info">
+            <h1>Seja bem-vindo ao seu perfil!</h1>
+            <img src={user?.avatar || ''}></img>
+            <p>{user?.name}</p>
+        </div>
     )
 }
