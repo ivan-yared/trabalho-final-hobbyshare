@@ -1,0 +1,23 @@
+.container-main{
+    background-image: none;
+}
+
+.container-feed h1{
+    text-align: center;
+    color: #4314A8;
+}
+
+.postform input[type=submit]{
+    height: 25px;
+    color: #fff;
+}
+
+textarea{
+    resize: none;
+    border: 2px solid #4314A8;
+    border-radius: 10px;
+}
+
+::selection{
+    border: 2px solid #4314A8;
+}

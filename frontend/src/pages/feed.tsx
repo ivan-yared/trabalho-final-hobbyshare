@@ -3,6 +3,8 @@ import { useNavigate } from 'react-router-dom';
 import { FormEvent, useState } from 'react';
 import { database } from '../services/firebase';
 
+import '../styles/feed.css';
+
 export function Feed () {
     const navigate = useNavigate();
     const { user, signInWithGoogle } = useAuth();
@@ -38,12 +40,20 @@ export function Feed () {
 
     return (
         <div>
-            <h1>Bem-vindo ao feed!</h1>
-            <form method="post" className="postform" onSubmit={handleCreatePost}>
-                <textarea form="postform" onChange={event => setNewPost(event.target.value)} value={newPost} placeholder='Compartilhe algo novo' cols={100} rows={10}></textarea>
-                <input type="submit" disabled={!user} value="Postar"></input>
-            </form>
-            <p>Inserir novos posts aqui</p>
+            <main className='container-main container-fluid'>
+                <div className='container-feed container-fluid'>
+                    <h1 className='mt-5'>Bem-vindo ao feed!</h1>
+                    <form method="post" className="postform d-flex justify-content-center" onSubmit={handleCreatePost}>
+                        <div className="m-5">
+                            <textarea form="postform" onChange={event => setNewPost(event.target.value)} value={newPost} placeholder='Compartilhe algo novo' cols={100} rows={10}></textarea>
+                        </div>
+                        <div className="mb-5 align-self-end">
+                            <input type="submit" disabled={!user} value="Postar"></input>
+                        </div>
+                    </form>
+                    <p>Inserir novos posts aqui</p>
+                </div>
+            </main>
         </div>
     )
 }
