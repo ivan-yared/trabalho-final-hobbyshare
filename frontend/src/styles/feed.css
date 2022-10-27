@@ -10,6 +10,7 @@
 .postform input[type=submit]{
     height: 25px;
     color: #fff;
+    background-color: #4314A8;
 }
 
 textarea{
