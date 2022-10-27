@@ -1,23 +1,37 @@
 import { useAuth } from '../hooks/useAuth';
 
+import '../styles/registrar.css';
+
 export function Registrar () {
     const { user, signInWithGoogle } = useAuth();
 
     return (
         <div>
             <main>
-                <form>
-                    <label htmlFor="nome">Nome completo</label>
-                    <input type="text" id="nome" className="input-padrao"></input>
+                <div className="container-fluid">
+                    <form className="card mx-auto mt-5 text-fade" data-aos="fade-up" data-aos-duration="1500" style={{ width: "50rem" }}>
+                        <div className="card-body">
+                            <label htmlFor="nome">Nome completo</label>
+                            <div className="mb-5">
+                                <input type="text" id="nome" placeholder='Nome' className="input-padrao"></input>
+                            </div>
 
-                    <label htmlFor="email">Email</label>
-                    <input type="email" id="email" className="input-padrao" required placeholder="seuemail@dominio.com"></input>
-                    
-                    <label htmlFor="senha">Senha</label>
-                    <input type="password" id="senha" className="input-padrao"></input>
+                            <label htmlFor="email">Email</label>
+                            <div className="mb-5">
+                                <input type="email" id="email" className="input-padrao" required placeholder="seuemail@dominio.com"></input>
+                            </div>
+                            
+                            
+                            <label htmlFor="senha">Senha</label>
+                            <div className="mb-5">
+                                <input type="password" id="senha" placeholder='Senha' className="input-padrao"></input>
+                            </div>
+                            
 
-                    <input type="submit" value="Registrar" className="registrar"></input>
-                </form>
+                            <input type="submit" value="Registrar" className="registrar"></input>
+                        </div>
+                    </form>
+                </div>
             </main>
         </div>
     )
