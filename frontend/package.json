@@ -9,7 +9,12 @@
     "@types/jest": "^29.1.2",
     "@types/node": "^18.11.0",
     "@types/react-dom": "^18.0.6",
+    "body-parser": "^1.20.1",
     "bootstrap": "^3.4.1",
+    "cors": "^2.8.5",
+    "dotenv": "^16.0.3",
+    "express": "^4.18.2",
+    "mysql": "^2.18.1",
     "node": "^18.11.0",
     "react": "^18.2.0",
     "react-bootstrap": "^2.5.0",
@@ -47,6 +52,7 @@
   "devDependencies": {
     "@types/react": "^18.0.21",
     "@types/react-router-dom": "^5.3.3",
-    "node-sass": "npm:sass@^1.55.0"
+    "node-sass": "npm:sass@^1.55.0",
+    "nodemon": "^2.0.20"
   }
 }
