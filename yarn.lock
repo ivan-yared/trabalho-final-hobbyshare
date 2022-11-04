@@ -633,6 +633,11 @@
     "@firebase/storage-compat" "0.1.20"
     "@firebase/util" "1.7.2"
 
+"formidable@~1.0.14":
+  "integrity" "sha512-95MFT5qipMvUiesmuvGP1BI4hh5XWCzyTapiNJ/k8JBQda7rPy7UCWYItz2uZEdTgGNy1eInjzlL9Wx1O9fedg=="
+  "resolved" "https://registry.npmjs.org/formidable/-/formidable-1.0.17.tgz"
+  "version" "1.0.17"
+
 "fs.realpath@^1.0.0":
   "integrity" "sha512-OO0pH2lK6a0hZnAdau5ItzHPI6pUlvI7jMVnxUQRtw4owF2wk8lOSabtGDCTP4Ggrg2MbGnWO9X8K1t4+fGMDw=="
   "resolved" "https://registry.npmjs.org/fs.realpath/-/fs.realpath-1.0.0.tgz"
@@ -984,6 +989,13 @@
   "integrity" "sha512-MATJdZp8sLqDl/68LfQmbP8zKPLQNV6BIZoIgrscFDQ+RsvK/BxeDQOgyxKKoh0y/8h3BqVFnCqQ/gd+reiIXA=="
   "resolved" "https://registry.npmjs.org/setimmediate/-/setimmediate-1.0.5.tgz"
   "version" "1.0.5"
+
+"simple-api@^0.1.1":
+  "integrity" "sha512-mDVn/MNgoGHOnRP1vZYuLAY690hjobmOOoLktg5nd67DcrWbJAWljiNCrUSh94PRhyxJJWpRsOm9moZTbAk3Ng=="
+  "resolved" "https://registry.npmjs.org/simple-api/-/simple-api-0.1.1.tgz"
+  "version" "0.1.1"
+  dependencies:
+    "formidable" "~1.0.14"
 
 "source-map-js@>=0.6.2 <2.0.0":
   "integrity" "sha512-R0XvVJ9WusLiqTCEiGCmICCMplcCkIwwR11mOSD9CR5u+IXYdiseeEuXCVAjS54zqwkLcPNnmU4OeJ6tUrWhDw=="
