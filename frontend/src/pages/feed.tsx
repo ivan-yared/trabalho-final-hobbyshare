@@ -49,6 +49,14 @@ export function Feed () {
                         <div className="m-5">
                             <textarea form="postform" onChange={event => setNewPost(event.target.value)} value={newPost} placeholder='Compartilhe algo novo' cols={100} rows={10}></textarea>
                         </div>
+                        <div>
+                        <p>Upload de foto</p>
+                            <input 
+                            type="file"
+                            id="photo" 
+                            name="photo"
+                            accept="image/*"></input>
+                        </div>
                         <div className="mb-5 align-self-end">
                             <input type="submit" disabled={!user} value="Postar"></input>
                         </div>
