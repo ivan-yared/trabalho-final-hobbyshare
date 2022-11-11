@@ -5,7 +5,9 @@ const router = express.Router();
 const { checkToken } = require ('../auth/tokenValidation.js');
 const postController = require("../controllers/postController.js")
 
+
 router.get("/postagens", postController.getPost);
+
 
 router.post("/users", createUser);
 router.get("/users", checkToken, getUsers);

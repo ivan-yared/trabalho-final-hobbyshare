@@ -1,3 +1,5 @@
+import React from 'react';
+
 import { useAuth } from '../hooks/useAuth';
 import { useNavigate } from 'react-router-dom';
 
@@ -13,8 +15,6 @@ export function Perfil () {
     return (
         <div className="user-info">
             <h1>Seja bem-vindo ao seu perfil!</h1>
-            <img src={user?.avatar || ''}></img>
-            <p>{user?.name}</p>
         </div>
     )
 }
