@@ -1,5 +1,7 @@
 import { createContext, ReactNode, useEffect, useState } from "react";
 import { auth, firebase } from "../services/firebase";
+import React from 'react';
+import axios from "axios";
 
 type User = {
     id: string;

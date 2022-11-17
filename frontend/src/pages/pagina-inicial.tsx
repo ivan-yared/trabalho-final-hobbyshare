@@ -1,3 +1,5 @@
+import React from 'react';
+
 import { useNavigate, Navigate } from 'react-router-dom';
 import '../styles/pagina-inicial.css';
 import { useAuth } from '../hooks/useAuth';

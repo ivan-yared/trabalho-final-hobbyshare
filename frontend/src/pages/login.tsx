@@ -1,12 +1,24 @@
+import React, { useState } from 'react';
+
 import { auth, firebase } from '../services/firebase'
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../hooks/useAuth';
+
+import axios from "axios";
+import Cookies from "universal-cookie";
+
 
 import '../styles/login.css';
 
 export function Login () {
     const navigate = useNavigate();
     const { user, signInWithGoogle } = useAuth();
+
+    const [email, setEmail] = useState("");
+    const [password, setPassword] = useState("");
+    const [login, setLogin] = useState(false);
+
+    const cookies = new Cookies();
 
     let path = '/feed';
     if (user) {
@@ -22,6 +34,30 @@ export function Login () {
         navigate(path);
     }
 
+    const handleSubmit = (e: any) => {
+        e.preventDefault();
+        const configuration = {
+            method: "post",
+            url: "http://localhost:4000/api/users/login",
+            data: {
+                email,
+                password,
+            }
+        };
+        axios(configuration)
+            .then((result) => {
+                setLogin(true);
+                cookies.set("TOKEN", result.data.token, {
+                    path: "/",
+                  });
+                window.location.href = "/feed"
+            })
+            .catch((error) => {
+                error = new Error();
+            });
+        
+      }
+
     return (
         <div>
             <main>
@@ -30,21 +66,27 @@ export function Login () {
                         <div className="card-body">
                             <label htmlFor="email">Email</label>
                             <div className="mb-5">
-                                <input type="email" id="email" className="input-padrao" required placeholder="seuemail@dominio.com"></input>
+                                <input type="email" id="email" className="input-padrao" required placeholder="seuemail@dominio.com" value={email} onChange={(e) => setEmail(e.target.value)}></input>
                             </div>
                             
                             <label htmlFor="senha">Senha</label>
                             <div className="mb-5">
-                                <input type="password" id="senha" className="input-padrao" placeholder='senha'></input>
+                                <input type="password" id="senha" className="input-padrao" placeholder='senha' value={password} onChange={(e) => setPassword(e.target.value)}></input>
                             </div>
 
                             <div className="mb-4">
-                                <input type="submit" value="Entrar" className="enviar"></input>
+                                <input type="submit" value="Entrar" className="enviar" onClick={(e)=>handleSubmit(e)}></input>
                             </div>
 
                             <div className="mb-3">
                                 <button onClick={authLoginGoogle}>Entrar com Conta Google</button>
                             </div>
+
+                            {login ? (
+                                <p className='text-success'>Logado com sucesso</p>
+                            ) : (
+                                <p className="text-danger">Login em andamento</p>
+                            )}
                         </div>
                     </form>
                 </div>
