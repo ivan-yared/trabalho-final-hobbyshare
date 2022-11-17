@@ -6,6 +6,7 @@ const { create, getUserById, getUsers, updateUser, deleteUser, getUserByEmail } 
 module.exports = {
     createUser: (req, res) => {
         const body = req.body;
+        console.log(body)
         body.password = hashSync(body.password, 10);
         create(body, (err, results) => {
             if (err) {
