@@ -58,7 +58,7 @@ export function Feed () {
                             accept="image/*"></input>
                         </div>
                         <div className="mb-5 align-self-end">
-                            <input type="submit" disabled={!user} value="Postar"></input>
+                            <input type="submit" value="Postar"></input>
                         </div>
                     </form>
                     <p>Inserir novos posts aqui</p>

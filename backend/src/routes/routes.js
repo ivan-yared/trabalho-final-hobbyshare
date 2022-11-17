@@ -4,13 +4,17 @@ const express = require('express');
 const router = express.Router(); 
 const { checkToken } = require ('../auth/tokenValidation.js');
 const postController = require("../controllers/postController.js")
+const multer = require("multer")
 
+const upload = multer({ dest: '/src/assets/avatar' })
+
+router.post('/avatar', upload.single('avatar'));
 
 router.get("/postagens", postController.getPost);
 router.get("/postagens/:id", postController.getPostById);
 router.post("/postagens", postController.insertPost);
-router.put("/postagens:id", postController.updatePost);
-router.delete("/postagens:id", postController.deletePost);
+router.put("/postagens/:id", postController.updatePost);
+router.delete("/postagens/:id", postController.deletePost);
 
 router.post("/users", createUser);
 router.get("/users", checkToken, getUsers);
