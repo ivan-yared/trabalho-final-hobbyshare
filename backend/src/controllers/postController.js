@@ -20,11 +20,11 @@ module.exports = {
         res.json(json)
     },
 
-    getSinglePost: async(req, res) => {
+    getPostById: async(req, res) => {
         let json = {error: "", result:{}}
 
         let id = req.param.id
-        let postagem = await postService.getSinglePost(id)
+        let postagem = await postService.getPostById(id)
 
         if (postagem){
             json.result = postagem
@@ -57,6 +57,41 @@ module.exports = {
         }else{
             json.error = 'campos não enviados.'
         }
+        res.json(json)
+    },
+
+    updatePost: async(req, res) => {
+        let json = {error: "", result:{}}
+
+        let id = req.body.id
+        let title = req.body.title
+        let body = req.body.body
+        let pathImage = req.body.pathImage
+        let pathVideo = req.body.pathVideo
+        let created = req.body.created
+        let user = req.body.user
+
+        if (id && title && body && pathImage && pathVideo && created && user){
+            await postService.updatePost(id, title, body, pathImage, pathVideo, created, user)
+            json.result = {
+                id,
+                title,
+                body,
+                pathImage,
+                pathVideo,
+                created,
+                user
+            }
+        }else{
+            json.error = 'campos não enviados.'
+        }
+        res.json(json)
+    },
+
+    deletePost: async(req, res) => {
+        let json = {error:'', result:{}}
+
+        await postService.deletePost(req.params.id)
 
         res.json(json)
     }

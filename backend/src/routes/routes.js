@@ -7,9 +7,10 @@ const postController = require("../controllers/postController.js")
 
 
 router.get("/postagens", postController.getPost);
-router.get("/postagens/:id", postController.getSinglePost);
-router.get("/postagens", postController.insertPost);
-
+router.get("/postagens/:id", postController.getPostById);
+router.post("/postagens", postController.insertPost);
+router.put("/postagens:id", postController.updatePost);
+router.delete("/postagens:id", postController.deletePost);
 
 router.post("/users", createUser);
 router.get("/users", checkToken, getUsers);

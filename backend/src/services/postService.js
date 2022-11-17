@@ -13,7 +13,7 @@ module.exports = {
         })
     },
 
-    getSinglePost: (id) => {
+    getPostByID: (id) => {
         return new Promise((aceito, rejeitado) => {
 
             db.query('SELECT * FROM `hobbyshare`.`posts` WHERE id = ?', [id], (error, results) => {
@@ -43,6 +43,33 @@ module.exports = {
                     }
                     aceito(results.insertPost)
                 })
+        })
+    },
+
+    updatePost: (id, title, body, pathImage, pathVideo, created, user) => {
+        return new Promise((aceito, rejeitado) => {
+
+            db.query('UPDATE `hobbyshare`.`posts` SET title = ?, body = ?, path_imagem = ?, path_video = ?, created = ?, user = ? WHERE id = ?', 
+                [title, body, pathImage, pathVideo, created, user, id], 
+                (error, results) => {
+                    if (error){
+                        rejeitado(error)
+                        return
+                    }
+                    aceito(results.insertPost)
+                })
+        })
+    },
+
+    deletePost: (id) =>{
+        return new Promise((aceito, rejeitado)=>{
+            db.query("DELETE FROM `hobbyshare`.`posts` WHERE id = ?", [id], (error, results)=>{
+                if(error){
+                    rejeitado(error)
+                    return
+                }
+                aceito(results)
+            })
         })
     }
 }
