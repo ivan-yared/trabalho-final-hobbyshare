@@ -1,11 +1,10 @@
 import React, { useState } from 'react';
 
-import { auth, firebase } from '../services/firebase'
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../hooks/useAuth';
 
 import axios from "axios";
-import Cookies from "universal-cookie";
+import Cookies from "universal-cookie/es6/Cookies";
 
 
 import '../styles/login.css';

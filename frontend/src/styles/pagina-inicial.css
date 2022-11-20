@@ -21,7 +21,6 @@
     margin-left: 45px;
     padding: 15px 35px;
     height: 3rem;
-    text-shadow: 2px 2px 2px #808080;
 }
 
 main{
@@ -33,7 +32,6 @@ main{
 main .text-fade {
     color: #fff;
     width: 400px;
-    text-shadow: 3px 3px 3px #333;
     word-wrap:normal;
 }
 
