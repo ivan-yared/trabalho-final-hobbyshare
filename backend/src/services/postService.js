@@ -31,11 +31,11 @@ module.exports = {
         })
     },
 
-    insertPost: (title, body, pathImage, pathVideo, created, user) => {
+    insertPost: (title, body, pathImage, pathVideo, user) => {
         return new Promise((aceito, rejeitado) => {
 
-            db.query('INSERT INTO `hobbyshare`.`posts` (title, body, path_imagem, path_video, created, user) VALUES (?, ?, ?, ?, ?, ?)', 
-                [title, body, pathImage, pathVideo, created, user], 
+            db.query('INSERT INTO `hobbyshare`.`posts` (title, body, path_imagem, path_video, user) VALUES (?, ?, ?, ?, ?)', 
+                [title, body, pathImage, pathVideo, user], 
                 (error, results) => {
                     if (error){
                         rejeitado(error)
@@ -46,11 +46,11 @@ module.exports = {
         })
     },
 
-    updatePost: (id, title, body, pathImage, pathVideo, created, user) => {
+    updatePost: (id, title, body, pathImage, pathVideo) => {
         return new Promise((aceito, rejeitado) => {
 
-            db.query('UPDATE `hobbyshare`.`posts` SET title = ?, body = ?, path_imagem = ?, path_video = ?, created = ?, user = ? WHERE id = ?', 
-                [title, body, pathImage, pathVideo, created, user, id], 
+            db.query('UPDATE `hobbyshare`.`posts` SET title = ?, body = ?, path_imagem = ?, path_video = ?, WHERE id = ?', 
+                [title, body, pathImage, pathVideo, id], 
                 (error, results) => {
                     if (error){
                         rejeitado(error)

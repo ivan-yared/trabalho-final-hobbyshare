@@ -14,6 +14,7 @@ export function Registrar () {
     const [name, setName] = useState("");
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
+    const [photo, setPhoto] = useState("");
     const [registrar, setRegistrar] = useState(false);
 
     let path = '/feed';
@@ -35,6 +36,7 @@ export function Registrar () {
                 name,
                 email,
                 password,
+                photo,
             },
         };
         axios(configuration)
@@ -68,6 +70,16 @@ export function Registrar () {
                             <label htmlFor="senha">Senha</label>
                             <div className="mb-5">
                                 <input type="password" id="senha" required placeholder='Senha' className="input-padrao" value={password} onChange={(e) => setPassword(e.target.value)}></input>
+                            </div>
+
+                            <label htmlFor="photo">Foto de perfil</label>
+                            <div className="mb-5">
+                                <input 
+                                type="file"
+                                id="photo" 
+                                name="photo"
+                                accept="image/*"
+                                onChange={(e) => setPhoto(e.target.value)}></input>
                             </div>
                             
 

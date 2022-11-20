@@ -69,6 +69,7 @@ export function Feed () {
                             accept="image/*"
                             onChange={(e) => setPathImage(e.target.value)}></input>
                             <input type="submit" disabled={!token} value="Postar" onClick={(e)=>handleCreatePost(e)}></input>
+                            accept="image/*"></input>
                         </div>
                     </form>
                     <p>Inserir novos posts aqui</p>

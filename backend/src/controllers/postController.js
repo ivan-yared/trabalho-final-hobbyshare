@@ -40,18 +40,16 @@ module.exports = {
         let body = req.body.body
         let pathImage = req.body.pathImage
         let pathVideo = req.body.pathVideo
-        let created = req.body.created
         let user = req.body.user
 
-        if (title && body && pathImage && pathVideo && created && user){
-            let idPostagem = await postService.insertPost(title, body, pathImage, pathVideo, created, user)
+        if (title && body && user){
+            let idPostagem = await postService.insertPost(title, body, pathImage, pathVideo, user)
             json.result = {
                 id: idPostagem,
                 title,
                 body,
                 pathImage,
                 pathVideo,
-                created,
                 user
             }
         }else{
@@ -71,8 +69,8 @@ module.exports = {
         let created = req.body.created
         let user = req.body.user
 
-        if (id && title && body && pathImage && pathVideo && created && user){
-            await postService.updatePost(id, title, body, pathImage, pathVideo, created, user)
+        if (id && title && body && user){
+            await postService.updatePost(title, body, pathImage, pathVideo)
             json.result = {
                 id,
                 title,
