@@ -51,7 +51,7 @@ export function Header () {
 
     return (
         <header className="cabecalho container-fluid">
-      <div className="p-3 text-fade" data-aos="fade-up" data-aos-duration="1500">
+      <div className="p-3 text-fade" data-aos="fade-down" data-aos-duration="1500">
           <h1>HobbyShare</h1>
           {estaLogado()}
       </div>

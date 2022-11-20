@@ -20,6 +20,18 @@
     border: 1px solid #4314A8;
 }
 
+#postTitle{
+    border: 2px solid #4314A8;
+    background-color: #fff;
+    width: 800px;
+    text-align: center;
+}
+
+input[type=file]{
+    display: none;
+    background-color: transparent;
+}
+
 textarea{
     resize: none;
     border: 2px solid #4314A8;

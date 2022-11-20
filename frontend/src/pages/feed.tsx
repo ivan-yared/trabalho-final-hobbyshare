@@ -3,42 +3,51 @@ import React from 'react';
 import { useAuth } from '../hooks/useAuth';
 import { useNavigate } from 'react-router-dom';
 import { FormEvent, useState } from 'react';
-import { database } from '../services/firebase';
+import Cookies from "universal-cookie";
+import { useAuthEmail } from '../hooks/useAuthEmail';
 
 import '../styles/feed.css';
+import axios from 'axios';
+
 
 export function Feed () {
     const navigate = useNavigate();
-    const { user, signInWithGoogle } = useAuth();
     const [newPost, setNewPost] = useState('');
+    const token = useAuthEmail();
+    const cookies = new Cookies();
+
+    const [title, setTitle] = useState("");
+    const [body, setBody] = useState("");
+    const [pathImage, setPathImage] = useState("");
+    const [user, setUser] = useState("");
+    const [postagem, setPostagem] = useState(false);
 
     let path = '/login';
-    if (!user) {
+    if (!token) {
         navigate(path);
     }
 
-    async function handleCreatePost(event: FormEvent) {
-        event.preventDefault();
-
-        if (newPost.trim() === ''){
-            return;
-        }
-        if (!user) {
-            throw new Error ('Você deve estar logado para efetuar esta ação.');
-        }
-        const post = {
-            content: newPost,
-            author: {
-                name: user.name,
-                avatar: user.avatar,
+    async function handleCreatePost(e: any) {
+        const configuration = {
+            method: "post",
+            url: "http://localhost:4000/api/postagens",
+            data: {
+                title,
+                body,
+                pathImage,
+                user,
             },
         };
-        await database.ref(``).push() // Dentro do parentesis: coleção onde será salvo o post no Firestore
-
-        setNewPost('');
+        axios(configuration)
+        .then((result) => {
+            setPostagem(true);
+            window.location.href = "/feed"
+        })
+        .catch((error) => {
+            error = new Error();
+            console.log(error);
+        });
     };
-
-
 
     return (
         <div>
@@ -47,18 +56,19 @@ export function Feed () {
                     <h1 className='mt-5'>Bem-vindo ao feed!</h1>
                     <form method="post" className="postform d-flex justify-content-center" onSubmit={handleCreatePost}>
                         <div className="m-5">
-                            <textarea form="postform" onChange={event => setNewPost(event.target.value)} value={newPost} placeholder='Compartilhe algo novo' cols={100} rows={10}></textarea>
+                            <input type="text" id="postTitle" className='m-3' placeholder='Titulo' onChange={(e) => setTitle(e.target.value)}/>
+                            <textarea form="postform" onChange={(e) => setBody(e.target.value)} placeholder='Compartilhe algo novo' cols={100} rows={10}></textarea>
                         </div>
-                        <div>
+                        <div className="mb-5 align-self-end">
                         <p>Upload de foto</p>
                             <input 
                             type="file"
-                            id="photo" 
+                            id="photo"
+                            className='my-4' 
                             name="photo"
-                            accept="image/*"></input>
-                        </div>
-                        <div className="mb-5 align-self-end">
-                            <input type="submit" disabled={!user} value="Postar"></input>
+                            accept="image/*"
+                            onChange={(e) => setPathImage(e.target.value)}></input>
+                            <input type="submit" disabled={!token} value="Postar" onClick={(e)=>handleCreatePost(e)}></input>
                         </div>
                     </form>
                     <p>Inserir novos posts aqui</p>
