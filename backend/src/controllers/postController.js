@@ -40,17 +40,17 @@ module.exports = {
         let body = req.body.body
         let pathImage = req.body.pathImage
         let pathVideo = req.body.pathVideo
-        let user = req.body.user
+        let email = req.body.email
 
-        if (title && body && user){
-            let idPostagem = await postService.insertPost(title, body, pathImage, pathVideo, user)
+        if (title && body && email){
+            let idPostagem = await postService.insertPost(title, body, pathImage, pathVideo, email)
             json.result = {
                 id: idPostagem,
                 title,
                 body,
                 pathImage,
                 pathVideo,
-                user
+                email
             }
         }else{
             json.error = 'campos não enviados.'

@@ -32,6 +32,7 @@ export function Header () {
 
     function logout () {
         cookies.remove("TOKEN")
+        localStorage.removeItem("email")
         navigate('/');
     }
 

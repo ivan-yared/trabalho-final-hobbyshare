@@ -113,7 +113,8 @@ module.exports = {
                 return res.json({
                     success: 1,
                     message: "Login bem sucedido",
-                    token: jsontoken
+                    token: jsontoken,
+                    email: body.email
                 });
             } else {
                 return res.json({

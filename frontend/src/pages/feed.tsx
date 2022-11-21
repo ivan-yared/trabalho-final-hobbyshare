@@ -4,6 +4,7 @@ import { useAuth } from '../hooks/useAuth';
 import { useNavigate } from 'react-router-dom';
 import { FormEvent, useState } from 'react';
 import Cookies from "universal-cookie";
+import { useCookies, CookiesProvider } from "react-cookie"
 import { useAuthEmail } from '../hooks/useAuthEmail';
 
 import '../styles/feed.css';
@@ -14,12 +15,12 @@ export function Feed () {
     const navigate = useNavigate();
     const [newPost, setNewPost] = useState('');
     const token = useAuthEmail();
-    const cookies = new Cookies();
+    const [cookies, setCookie] = useCookies(['TOKEN']);
 
     const [title, setTitle] = useState("");
     const [body, setBody] = useState("");
     const [pathImage, setPathImage] = useState("");
-    const [user, setUser] = useState("");
+    const [email, setEmail] = useState("");
     const [postagem, setPostagem] = useState(false);
 
     let path = '/login';
@@ -27,7 +28,8 @@ export function Feed () {
         navigate(path);
     }
 
-    async function handleCreatePost(e: any) {
+    const handleCreatePost = (e: any) => {
+        e.preventDefault();
         const configuration = {
             method: "post",
             url: "http://localhost:4000/api/postagens",
@@ -35,17 +37,18 @@ export function Feed () {
                 title,
                 body,
                 pathImage,
-                user,
+                email: localStorage.getItem("email"),
             },
         };
         axios(configuration)
         .then((result) => {
+            console.log(cookies);
+            console.log(configuration);
             setPostagem(true);
-            window.location.href = "/feed"
+            // window.location.href = "/feed"
         })
         .catch((error) => {
             error = new Error();
-            console.log(error);
         });
     };
 
@@ -69,7 +72,6 @@ export function Feed () {
                             accept="image/*"
                             onChange={(e) => setPathImage(e.target.value)}></input>
                             <input type="submit" disabled={!token} value="Postar" onClick={(e)=>handleCreatePost(e)}></input>
-                            accept="image/*"></input>
                         </div>
                     </form>
                     <p>Inserir novos posts aqui</p>

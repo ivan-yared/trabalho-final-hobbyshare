@@ -46,6 +46,7 @@ export function Login () {
         axios(configuration)
             .then((result) => {
                 setLogin(true);
+                localStorage.setItem("email", configuration.data.email)
                 cookies.set("TOKEN", result.data.token, {
                     path: "/",
                   });

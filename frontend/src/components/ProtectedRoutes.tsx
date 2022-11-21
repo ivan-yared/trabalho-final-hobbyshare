@@ -9,7 +9,6 @@ type Props = {
 
 const ProtectedRoute:React.FC<Props> = ({children}) => {
     const isAuthenticated = cookies.get("TOKEN");
-    console.log(isAuthenticated);
     if (!isAuthenticated) {
         return (
             <Navigate to={"/"}/>

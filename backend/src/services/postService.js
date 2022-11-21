@@ -31,11 +31,11 @@ module.exports = {
         })
     },
 
-    insertPost: (title, body, pathImage, pathVideo, user) => {
+    insertPost: (title, body, pathImage, pathVideo, email) => {
         return new Promise((aceito, rejeitado) => {
 
-            db.query('INSERT INTO `hobbyshare`.`posts` (title, body, path_imagem, path_video, user) VALUES (?, ?, ?, ?, ?)', 
-                [title, body, pathImage, pathVideo, user], 
+            db.query('INSERT INTO `hobbyshare`.`posts` (title, body, path_imagem, path_video, user) SELECT ?, ?, ?, ?, id FROM `hobbyshare`.`users` WHERE email = ?', 
+                [title, body, pathImage, pathVideo, email], 
                 (error, results) => {
                     if (error){
                         rejeitado(error)

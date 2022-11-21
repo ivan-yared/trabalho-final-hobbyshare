@@ -3,13 +3,15 @@ import React from 'react';
 import { useNavigate, Navigate } from 'react-router-dom';
 import '../styles/pagina-inicial.css';
 import { useAuth } from '../hooks/useAuth';
+import { useAuthEmail } from '../hooks/useAuthEmail';
 
 export function Home() {
     const navigate = useNavigate();
     const { user, signInWithGoogle } = useAuth();
+    const token = useAuthEmail();
 
     let path = '/feed';
-    if (user) {
+    if (user || token) {
         navigate(path);
     }
 
