@@ -2,14 +2,16 @@ import React from 'react';
 
 import { useAuth } from '../hooks/useAuth';
 import { useNavigate } from 'react-router-dom';
-import { FormEvent, useState } from 'react';
+import { FormEvent, useState, useEffect } from 'react';
 import Cookies from "universal-cookie";
 import { useCookies, CookiesProvider } from "react-cookie"
 import { useAuthEmail } from '../hooks/useAuthEmail';
 
 import '../styles/feed.css';
 import axios from 'axios';
-
+import { resourceLimits } from 'worker_threads';
+import { render } from '@testing-library/react';
+import { Postagem } from '../models/post';
 
 export function Feed () {
     const navigate = useNavigate();
@@ -23,10 +25,45 @@ export function Feed () {
     const [email, setEmail] = useState("");
     const [postagem, setPostagem] = useState(false);
 
+    const [posts, getPosts] = useState<Postagem[]>([]);
+
     let path = '/login';
     if (!token) {
         navigate(path);
     }
+
+    function handleGetPost() {
+        
+
+        const configuration = {
+            url: "http://localhost:4000/api/postagens",
+            method: 'GET',
+            port: '4000'
+        };
+        axios(configuration)
+        .then((result) => {
+            const allPostagens = result.data.result;
+            getPosts(allPostagens);
+            
+        })
+        .catch((error) => {
+            error = new Error();
+        });
+        return (
+            <>
+                {posts.map((post, index) => <div key={index}>
+                    <p>{post.title}</p>
+                    <p>{post.body}</p>
+                    <p>{post.user}</p>
+                </div>)}
+            </>
+        )
+
+    };
+
+    useEffect(() => {
+        handleGetPost();
+    }, []);
 
     const handleCreatePost = (e: any) => {
         e.preventDefault();
@@ -42,10 +79,8 @@ export function Feed () {
         };
         axios(configuration)
         .then((result) => {
-            console.log(cookies);
-            console.log(configuration);
             setPostagem(true);
-            // window.location.href = "/feed"
+            window.location.href = "/feed"
         })
         .catch((error) => {
             error = new Error();
@@ -74,7 +109,7 @@ export function Feed () {
                             <input type="submit" disabled={!token} value="Postar" onClick={(e)=>handleCreatePost(e)}></input>
                         </div>
                     </form>
-                    <p>Inserir novos posts aqui</p>
+                    <>{handleGetPost()}</>
                 </div>
             </main>
         </div>

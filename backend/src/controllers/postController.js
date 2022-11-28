@@ -2,7 +2,7 @@ const postService = require("../services/postService.js")
 
 module.exports = {
     getPost: async (req, res)=> {
-        let json = {error: "", result:[]}
+        let json = {result:[]}
 
         let postagens = await postService.getPost()
 
