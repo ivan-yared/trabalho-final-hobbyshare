@@ -12,6 +12,7 @@ import axios from 'axios';
 import { resourceLimits } from 'worker_threads';
 import { render } from '@testing-library/react';
 import { Postagem } from '../models/post';
+import { Usuario } from '../models/usuario';
 
 export function Feed () {
     const navigate = useNavigate();
@@ -26,15 +27,37 @@ export function Feed () {
     const [postagem, setPostagem] = useState(false);
 
     const [posts, getPosts] = useState<Postagem[]>([]);
+    const [user, getUser] = useState<Usuario>();
+
+    let [nome, getNome] = useState('')
+
 
     let path = '/login';
     if (!token) {
         navigate(path);
     }
 
-    function handleGetPost() {
-        
+    function handleGetUser(id: any) {
+        const configuration = {
+            url: `http://localhost:4000/api/users/${id}`,
+            method: 'GET',
+            port: 4000,
+        };
+        axios(configuration)
+        .then((result) => {
+            const nome = result.data.data.name;
+            getNome(nome);
+        })
+        .catch((error) => {
+            error = new Error();
+        })
+        return (
+            <>{nome}</>
+        )
 
+    }
+
+    function handleGetPost() {
         const configuration = {
             url: "http://localhost:4000/api/postagens",
             method: 'GET',
@@ -54,7 +77,7 @@ export function Feed () {
                 {posts.map((post, index) => <div key={index}>
                     <p>{post.title}</p>
                     <p>{post.body}</p>
-                    <p>{post.user}</p>
+                    {handleGetUser(post.user)}
                 </div>)}
             </>
         )
@@ -109,7 +132,9 @@ export function Feed () {
                             <input type="submit" disabled={!token} value="Postar" onClick={(e)=>handleCreatePost(e)}></input>
                         </div>
                     </form>
-                    <>{handleGetPost()}</>
+                    <div>
+                        <>{handleGetPost()}</>
+                    </div>
                 </div>
             </main>
         </div>
