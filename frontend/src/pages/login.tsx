@@ -15,6 +15,7 @@ export function Login () {
 
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
+    const [id, setId] = useState("");
     const [login, setLogin] = useState(false);
 
     const cookies = new Cookies();
@@ -41,12 +42,14 @@ export function Login () {
             data: {
                 email,
                 password,
+                id,
             }
         };
         axios(configuration)
             .then((result) => {
                 setLogin(true);
                 localStorage.setItem("email", configuration.data.email)
+                localStorage.setItem("id", configuration.data.id)
                 cookies.set("TOKEN", result.data.token, {
                     path: "/",
                   });

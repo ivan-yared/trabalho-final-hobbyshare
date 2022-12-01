@@ -30,7 +30,7 @@ router.put("/postagens/:id", postController.updatePost);
 router.delete("/postagens/:id", postController.deletePost);
 
 router.post("/users", createUser);
-router.get("/users", checkToken, getUsers);
+router.get("/users", getUsers);
 router.get("/users/:id", getUserById);
 router.put("/users/:id", checkToken, updateUser);
 router.delete("/users/:id", checkToken, deleteUser);

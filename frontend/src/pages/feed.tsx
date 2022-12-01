@@ -9,8 +9,6 @@ import { useAuthEmail } from '../hooks/useAuthEmail';
 
 import '../styles/feed.css';
 import axios from 'axios';
-import { resourceLimits } from 'worker_threads';
-import { render } from '@testing-library/react';
 import { Postagem } from '../models/post';
 import { Usuario } from '../models/usuario';
 
@@ -27,7 +25,7 @@ export function Feed () {
     const [postagem, setPostagem] = useState(false);
 
     const [posts, getPosts] = useState<Postagem[]>([]);
-    const [user, getUser] = useState<Usuario>();
+    const [users, getUsers] = useState<Usuario[]>([]);
 
     let [nome, getNome] = useState('')
 
@@ -38,6 +36,8 @@ export function Feed () {
     }
 
     function handleGetUser(id: any) {
+        let usuario!: string
+
         const configuration = {
             url: `http://localhost:4000/api/users/${id}`,
             method: 'GET',
@@ -51,13 +51,34 @@ export function Feed () {
         .catch((error) => {
             error = new Error();
         })
-        return (
-            <>{nome}</>
-        )
+        return( <>{nome}</> )
+    }
 
+    function handleGetUsersList() {
+        const userList: any = []
+
+        const configuration = {
+            url: `http://localhost:4000/api/users/`,
+            method: 'GET',
+            port: 4000,
+        };
+        axios(configuration)
+        .then((result) => {
+            getUsers(result.data.data)
+            for (let user in users) {
+                userList.push({id: users[user].id, nome: users[user].name});
+            }
+        })
+        .catch((error) => {
+            error = new Error();
+        });
+
+        return userList
+        
     }
 
     function handleGetPost() {
+
         const configuration = {
             url: "http://localhost:4000/api/postagens",
             method: 'GET',
@@ -77,16 +98,12 @@ export function Feed () {
                 {posts.map((post, index) => <div key={index}>
                     <p>{post.title}</p>
                     <p>{post.body}</p>
-                    {handleGetUser(post.user)}
+                    <>{handleGetUser(post.user)}</>
                 </div>)}
             </>
         )
 
     };
-
-    useEffect(() => {
-        handleGetPost();
-    }, []);
 
     const handleCreatePost = (e: any) => {
         e.preventDefault();
