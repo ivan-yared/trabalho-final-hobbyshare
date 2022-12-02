@@ -12,6 +12,8 @@ import axios from 'axios';
 import { Postagem } from '../models/post';
 import { Usuario } from '../models/usuario';
 
+import ProfilePicture from '../assets/profile-picture.png'
+
 export function Feed () {
     const navigate = useNavigate();
     const [newPost, setNewPost] = useState('');
@@ -77,33 +79,27 @@ export function Feed () {
         
     }
 
-    function handleGetPost() {
+   
 
-        const configuration = {
-            url: "http://localhost:4000/api/postagens",
-            method: 'GET',
-            port: '4000'
+    useEffect(() => {
+        function handleGetPost() {
+            const configuration = {
+                url: "http://localhost:4000/api/postagens",
+                method: 'GET',
+                port: '4000'
+            };
+            axios(configuration)
+            .then((result) => {
+                const allPostagens = result.data.result;
+                getPosts(allPostagens);
+            })
+            .catch((error) => {
+                error = new Error();
+            });
         };
-        axios(configuration)
-        .then((result) => {
-            const allPostagens = result.data.result;
-            getPosts(allPostagens);
-            
-        })
-        .catch((error) => {
-            error = new Error();
-        });
-        return (
-            <>
-                {posts.map((post, index) => <div key={index}>
-                    <p>{post.title}</p>
-                    <p>{post.body}</p>
-                    <>{handleGetUser(post.user)}</>
-                </div>)}
-            </>
-        )
 
-    };
+        handleGetPost()
+    },[])
 
     const handleCreatePost = (e: any) => {
         e.preventDefault();
@@ -150,7 +146,15 @@ export function Feed () {
                         </div>
                     </form>
                     <div>
-                        <>{handleGetPost()}</>
+                        <>
+                            {posts.map((post, index) => <div key={index}>
+                            <p>{post.title}</p>
+                            <p>{post.body}</p>
+                            {post.photo ? <img src={post.photo} /> : <img src={ProfilePicture}/>}
+                            
+                            <p>{post.name}</p>
+                            </div>)}
+                        </>
                     </div>
                 </div>
             </main>

@@ -9,6 +9,9 @@ module.exports = {
         for (let p in postagens){
             json.result.push({
                 id: postagens[p].id,
+                name: postagens[p].name,
+                photo: postagens[p].photo,
+                email: postagens[p].email,
                 title: postagens[p].title,
                 body: postagens[p].body,
                 pathImage: postagens[p].pathImage,
@@ -23,7 +26,7 @@ module.exports = {
     getPostById: async(req, res) => {
         let json = {error: "", result:{}}
 
-        let id = req.param.id
+        let id = req.param.user
         let postagem = await postService.getPostById(id)
 
         if (postagem){
