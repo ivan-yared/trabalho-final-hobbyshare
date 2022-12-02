@@ -6,6 +6,7 @@ const router = express.Router();
 const { checkToken } = require ('../auth/tokenValidation.js');
 const postController = require("../controllers/postController.js")
 const multer = require("multer")
+const path = require("path")
 
 const storage = multer.diskStorage({
     destination: (req, file, cb) => {
@@ -20,6 +21,9 @@ const storage = multer.diskStorage({
 });
 
 const upload = multer({ storage: storage });
+
+console.log(path.join(__dirname, '../assets/avatar'))
+router.use('/avatar',express.static(path.join(__dirname, '../assets/avatar')))
 
 router.post('/users/:id/avatar', upload.single('avatar'), uploadAvatar);
 

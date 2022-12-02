@@ -150,7 +150,7 @@ export function Feed () {
                             {posts.map((post, index) => <div key={index}>
                             <p>{post.title}</p>
                             <p>{post.body}</p>
-                            {post.photo ? <img src={post.photo} /> : <img src={ProfilePicture}/>}
+                            {post.photo ? <img src={`http://localhost:4000/api/avatar/${post.photo}`} /> : <img src={ProfilePicture}/>}
                             
                             <p>{post.name}</p>
                             </div>)}
