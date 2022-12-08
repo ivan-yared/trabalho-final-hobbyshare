@@ -48,8 +48,8 @@ export function Login () {
         axios(configuration)
             .then((result) => {
                 setLogin(true);
-                localStorage.setItem("email", configuration.data.email)
-                localStorage.setItem("id", configuration.data.id)
+                localStorage.setItem("email", configuration.data.email);
+                localStorage.setItem("id", result.data.id.toString());
                 cookies.set("TOKEN", result.data.token, {
                     path: "/",
                   });
@@ -79,10 +79,6 @@ export function Login () {
 
                             <div className="mb-4">
                                 <input type="submit" value="Entrar" className="enviar" onClick={(e)=>handleSubmit(e)}></input>
-                            </div>
-
-                            <div className="mb-3">
-                                <button onClick={authLoginGoogle}>Entrar com Conta Google</button>
                             </div>
 
                             {login ? (

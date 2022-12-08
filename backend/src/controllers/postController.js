@@ -27,7 +27,7 @@ module.exports = {
         let json = {error: "", result:{}}
 
         let id = req.param.user
-        let postagem = await postService.getPostById(id)
+        let postagem = await postService.getPostByID(id)
 
         if (postagem){
             json.result = postagem

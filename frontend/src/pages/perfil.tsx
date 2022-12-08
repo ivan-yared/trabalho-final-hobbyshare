@@ -8,12 +8,14 @@ import { FormEvent, useState, useEffect } from 'react';
 import { Postagem } from '../models/post';
 import { Usuario } from '../models/usuario';
 
+
+
 export function Perfil () {
     const navigate = useNavigate();
     const { user, signInWithGoogle } = useAuth();
     const token = useAuthEmail();
 
-    const [postagens, getPostagens] = useState<Postagem[]>([]);
+    const [posts, getPosts] = useState<Postagem[]>([]);
     const [nome, getNome] = useState('')
 
     let path = '/login';
@@ -40,40 +42,36 @@ export function Perfil () {
         return( <>{nome}</> )
     }
 
-    function handleGetPost() {
-
-        const id = localStorage.getItem("id");
-
-        const configuration = {
-            url: `http://localhost:4000/api/postagens/${id}`,
-            method: 'GET',
-            port: '4000'
+    useEffect(() => {
+        function handleGetPost() {
+            const id = localStorage.getItem("id")
+            const configuration = {
+                url: `http://localhost:4000/api/postagens/${id}`,
+                method: 'GET',
+                port: '4000'
+            };
+            axios(configuration)
+            .then((result) => {
+                const allPostagens = result.data.result;
+                getPosts(allPostagens);
+            })
+            .catch((error) => {
+                error = new Error();
+            });
         };
-        axios(configuration)
-        .then((result) => {
-            const allPostagens = result.data.result;
-            console.log(allPostagens)
-            getPostagens(allPostagens);
-            
-        })
-        .catch((error) => {
-            error = new Error();
-        });
-        return (
-            <>
-                {postagens.map((post, index) => <div key={index}>
-                    <p>{post.title}</p>
-                    <p>{post.body}</p>
-                </div>)}
-            </>
-        )
 
-    };
+        handleGetPost()
+    },[])
 
     return (
         <div className="user-info">
             <h1>Seja bem-vindo ao seu perfil!</h1>
-            <>{handleGetPost()}</>
+                <>
+                    {posts.map((post, index) => <div key={index}>
+                    <p>{post.title}</p>
+                    <p>{post.body}</p>
+                    </div>)}
+                </>
         </div>
     )
 }

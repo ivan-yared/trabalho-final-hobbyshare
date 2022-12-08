@@ -16,7 +16,7 @@ module.exports = {
     getPostByID: (id) => {
         return new Promise((aceito, rejeitado) => {
 
-            db.query('SELECT * FROM `hobbyshare`.`posts` WHERE user = ?', [id], (error, results) => {
+            db.query('SELECT * FROM hobbyshare.posts WHERE user = ?', [id], (error, results) => {
                 if (error){
                     rejeitado(error)
                     return

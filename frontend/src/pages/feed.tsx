@@ -145,14 +145,14 @@ export function Feed () {
                             <input type="submit" disabled={!token} value="Postar" onClick={(e)=>handleCreatePost(e)}></input>
                         </div>
                     </form>
-                    <div>
+                    <div className='container-post container-fluid'>
                         <>
-                            {posts.map((post, index) => <div key={index}>
+                            {posts.map((post, index) => <div key={index} className="key">
+                            <div className='userInfo'>{post.photo ? <img src={`http://localhost:4000/api/avatar/${post.photo}`} /> : <img className="img-fluid my-3" src={ProfilePicture}/>}
+                            <p className='postName'>{post.name}</p></div>
                             <p>{post.title}</p>
                             <p>{post.body}</p>
-                            {post.photo ? <img src={`http://localhost:4000/api/avatar/${post.photo}`} /> : <img src={ProfilePicture}/>}
                             
-                            <p>{post.name}</p>
                             </div>)}
                         </>
                     </div>

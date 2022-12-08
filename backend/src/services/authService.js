@@ -59,7 +59,7 @@ module.exports = {
         })
     },
     getUserByEmail: (email, callback) => {
-        connection.query(`SELECT * FROM users WHERE email = ?`,
+        connection.query(`SELECT * FROM hobbyshare.users WHERE email = ?`,
         [email],
         (error, results, fields) => {
             if (error) {
@@ -68,6 +68,7 @@ module.exports = {
             if (results.length === 0) {
                 return callback(new Error("Usuário não existe"))
             }
+            console.log(results[0]);
             return callback(null, results[0]);
         })
     },
