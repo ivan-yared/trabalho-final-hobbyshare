@@ -79,26 +79,24 @@ export function Feed () {
         
     }
 
-   
+    function handleGetPost() {
+        const configuration = {
+            url: "http://localhost:4000/api/postagens",
+            method: 'GET',
+            port: '4000'
+        };
+        axios(configuration)
+        .then((result) => {
+            const allPostagens = result.data.result;
+            console.log(result.data.result);
+            getPosts(allPostagens);
+        })
+        .catch((error) => {
+            error = new Error();
+        });
+    };
 
     useEffect(() => {
-        function handleGetPost() {
-            const configuration = {
-                url: "http://localhost:4000/api/postagens",
-                method: 'GET',
-                port: '4000'
-            };
-            axios(configuration)
-            .then((result) => {
-                const allPostagens = result.data.result;
-                console.log(result.data.result);
-                getPosts(allPostagens);
-            })
-            .catch((error) => {
-                error = new Error();
-            });
-        };
-
         handleGetPost()
     },[])
 
@@ -120,9 +118,9 @@ export function Feed () {
         };
         axios(configuration)
         .then((result) => {
-            console.log(result.data)
+            console.log(result.data.result)
+            handleGetPost();
             setPostagem(true);
-            window.location.href = "/feed"
         })
         .catch((error) => {
             error = new Error();
