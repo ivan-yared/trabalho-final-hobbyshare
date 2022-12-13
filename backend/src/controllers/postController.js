@@ -43,7 +43,10 @@ module.exports = {
 
         let title = req.body.title
         let body = req.body.body
-        let pathImage = req.file.path 
+        let pathImage
+        if (req.file) {
+            pathImage = req.file.path
+        } 
         let pathVideo = req.body.pathVideo
         let email = req.body.email
 
