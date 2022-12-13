@@ -5,6 +5,7 @@ module.exports = {
         let json = {result:[]}
 
         let postagens = await postService.getPost()
+        console.log(postagens)
 
         for (let p in postagens){
             json.result.push({
@@ -14,12 +15,13 @@ module.exports = {
                 email: postagens[p].email,
                 title: postagens[p].title,
                 body: postagens[p].body,
-                pathImage: postagens[p].pathImage,
-                pathVideo: postagens[p].pathVideo,
+                pathImage: postagens[p].path_imagem,
+                pathVideo: postagens[p].path_video,
                 created: postagens[p].created,
-                user: postagens[p].user
+                user: postagens[p].user,
             })
         }
+        
         res.json(json)
     },
 
@@ -41,9 +43,13 @@ module.exports = {
 
         let title = req.body.title
         let body = req.body.body
-        let pathImage = req.body.pathImage
+        let pathImage = req.file.path 
         let pathVideo = req.body.pathVideo
         let email = req.body.email
+
+        if (pathImage) {
+            pathImage = pathImage.replace("src\\assets\\postagens\\", '')
+        }
 
         if (title && body && email){
             let idPostagem = await postService.insertPost(title, body, pathImage, pathVideo, email)

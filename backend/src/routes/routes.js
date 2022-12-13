@@ -4,32 +4,42 @@ const { uploadAvatar } = require("../controllers/avatarController.js")
 const express = require('express');
 const router = express.Router(); 
 const { checkToken } = require ('../auth/tokenValidation.js');
-const postController = require("../controllers/postController.js")
-const multer = require("multer")
-const path = require("path")
+const postController = require("../controllers/postController.js");
+const multer = require("multer");
+const path = require("path");
 
-const storage = multer.diskStorage({
+const storageImgPost = multer.diskStorage({
     destination: (req, file, cb) => {
-        cb(null, './src/assets/avatar')
-        console.log(file)
+        cb(null, './src/assets/postagens')
     },
     filename: function (req, file, cb) {
         const ext = file.mimetype.split("/")[1];
         cb(null, `${file.originalname}-${Date.now()}.${ext}`);
-        console.log(file)
+    }
+})
+
+const storage = multer.diskStorage({
+    destination: (req, file, cb) => {
+        cb(null, './src/assets/avatar')
+    },
+    filename: function (req, file, cb) {
+        const ext = file.mimetype.split("/")[1];
+        cb(null, `${file.originalname}-${Date.now()}.${ext}`);
     }
 });
 
 const upload = multer({ storage: storage });
 
-console.log(path.join(__dirname, '../assets/avatar'))
+const uploadImgPost = multer ({storage: storageImgPost});
+
 router.use('/avatar',express.static(path.join(__dirname, '../assets/avatar')))
+router.use('/postagens',express.static(path.join(__dirname, '../assets/postagens')))
 
 router.post('/users/:id/avatar', upload.single('avatar'), uploadAvatar);
 
 router.get("/postagens", postController.getPost);
 router.get("/postagens/:id", postController.getPostById);
-router.post("/postagens", postController.insertPost);
+router.post("/postagens", uploadImgPost.single('pathImage'), postController.insertPost);
 router.put("/postagens/:id", postController.updatePost);
 router.delete("/postagens/:id", postController.deletePost);
 

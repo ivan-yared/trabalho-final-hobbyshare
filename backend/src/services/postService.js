@@ -3,7 +3,7 @@ const db = require("../db")
 module.exports = {
     getPost: () =>{
         return new Promise((aceito, rejeitado)=>{
-            db.query("SELECT u.id, name, photo, email, title, body, path_imagem, path_video, created FROM hobbyshare.users u INNER JOIN hobbyshare.posts p ON p.user = u.id", (error, results)=>{
+            db.query("SELECT u.id, name, photo, email, title, body, path_imagem, path_video, created FROM hobbyshare.users u INNER JOIN hobbyshare.posts p ON p.user = u.id ORDER BY created DESC", (error, results)=>{
                 if(error){
                     rejeitado(error)
                     return

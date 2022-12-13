@@ -68,3 +68,8 @@ textarea{
     display: flex;
     margin-bottom: 10px;
 }
+
+#postagemPhoto {
+    width: 50%;
+    height: 50%;
+}

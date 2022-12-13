@@ -7,4 +7,5 @@ export interface Postagem {
     body: string;
     created: Date;
     user?: number;
+    pathImage?: string;
 }

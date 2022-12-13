@@ -22,7 +22,7 @@ export function Feed () {
 
     const [title, setTitle] = useState("");
     const [body, setBody] = useState("");
-    const [pathImage, setPathImage] = useState("");
+    const [pathImage, setPathImage] = useState<File | null>(null);
     const [email, setEmail] = useState("");
     const [postagem, setPostagem] = useState(false);
 
@@ -91,6 +91,7 @@ export function Feed () {
             axios(configuration)
             .then((result) => {
                 const allPostagens = result.data.result;
+                console.log(result.data.result);
                 getPosts(allPostagens);
             })
             .catch((error) => {
@@ -102,19 +103,24 @@ export function Feed () {
     },[])
 
     const handleCreatePost = (e: any) => {
+        const formData = new FormData()
+        const emailUsuario = localStorage.getItem("email") || ""
+        formData.append("title", title)
+        formData.append("body", body)
+        if(pathImage) {
+            formData.append("pathImage", pathImage)
+        }
+        formData.append("email", emailUsuario)
         e.preventDefault();
         const configuration = {
             method: "post",
             url: "http://localhost:4000/api/postagens",
-            data: {
-                title,
-                body,
-                pathImage,
-                email: localStorage.getItem("email"),
-            },
+            data: formData,
+            headers: { "Content-Type": "multipart/form-data" },
         };
         axios(configuration)
         .then((result) => {
+            console.log(result.data)
             setPostagem(true);
             window.location.href = "/feed"
         })
@@ -137,11 +143,11 @@ export function Feed () {
                         <p>Upload de foto</p>
                             <input 
                             type="file"
-                            id="photo"
+                            id="pathImage"
                             className='my-4' 
-                            name="photo"
+                            name="pathImage"
                             accept="image/*"
-                            onChange={(e) => setPathImage(e.target.value)}></input>
+                            onChange={(e) => e.target.files && setPathImage(e.target.files[0])}></input>
                             <input type="submit" disabled={!token} value="Postar" onClick={(e)=>handleCreatePost(e)}></input>
                         </div>
                     </form>
@@ -152,7 +158,8 @@ export function Feed () {
                             <p className='postName'>{post.name}</p></div>
                             <p>{post.title}</p>
                             <p>{post.body}</p>
-                            
+                            <p>{post.created.toString()}</p>
+                            <img id="postagemPhoto" src={`http://localhost:4000/api/postagens/${post.pathImage}`}/>
                             </div>)}
                         </>
                     </div>
