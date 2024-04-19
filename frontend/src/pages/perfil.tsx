@@ -1,7 +1,6 @@
 import React from 'react';
 import axios from 'axios';
 
-import { useAuth } from '../hooks/useAuth';
 import { useAuthEmail } from '../hooks/useAuthEmail';
 import { useNavigate } from 'react-router-dom';
 import { FormEvent, useState, useEffect } from 'react';
@@ -12,7 +11,6 @@ import { Usuario } from '../models/usuario';
 
 export function Perfil () {
     const navigate = useNavigate();
-    const { user, signInWithGoogle } = useAuth();
     const token = useAuthEmail();
 
     const [posts, getPosts] = useState<Postagem[]>([]);

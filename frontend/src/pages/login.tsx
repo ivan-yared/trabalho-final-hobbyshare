@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 
 import { useNavigate } from 'react-router-dom';
-import { useAuth } from '../hooks/useAuth';
 
 import axios from "axios";
 import Cookies from "universal-cookie/es6/Cookies";
@@ -11,7 +10,6 @@ import '../styles/login.css';
 
 export function Login () {
     const navigate = useNavigate();
-    const { user, signInWithGoogle } = useAuth();
 
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
@@ -21,18 +19,6 @@ export function Login () {
     const cookies = new Cookies();
 
     let path = '/feed';
-    if (user) {
-        navigate(path);
-    }
-
-    async function authLoginGoogle () {
-        if (!user) {
-            await signInWithGoogle();
-        }
-
-        let path = '/feed';
-        navigate(path);
-    }
 
     const handleSubmit = (e: any) => {
         e.preventDefault();

@@ -1,6 +1,5 @@
 import React from 'react';
 
-import { useAuth } from '../hooks/useAuth';
 import { useNavigate } from 'react-router-dom';
 import { FormEvent, useState, useEffect } from 'react';
 import Cookies from "universal-cookie";

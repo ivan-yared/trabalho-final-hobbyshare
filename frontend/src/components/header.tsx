@@ -1,4 +1,3 @@
-import { useAuth } from '../hooks/useAuth';
 import { useNavigate, Navigate } from 'react-router-dom';
 import React from 'react';
 import { useAuthEmail } from '../hooks/useAuthEmail';
@@ -6,7 +5,6 @@ import Cookies from "universal-cookie";
 
 export function Header () {
     const navigate = useNavigate();
-    const { user, signInWithGoogle } = useAuth();
     const token = useAuthEmail();
     const cookies = new Cookies();
 
@@ -38,7 +36,7 @@ export function Header () {
     }
 
     function estaLogado () {
-        if (user || token) {
+        if (token) {
            return (<>
                 <button type="button" className="login btn btn-outline-light my-5" onClick={navigateToPerfil}>Minha página</button>
                 <button type="button" className="login btn btn-outline-light my-5" onClick={navigateToFeed}>Feed</button>

@@ -1,15 +1,14 @@
 import React from 'react';
 import axios from "axios";
 
-import { useAuth } from '../hooks/useAuth';
 import { useNavigate } from 'react-router-dom';
 
 import '../styles/registrar.css';
 import { useState } from 'react';
+import { useAuthEmail } from '../hooks/useAuthEmail';
 
 export function Registrar () {
     const navigate = useNavigate();
-    const { user, signInWithGoogle } = useAuth();
 
     const [name, setName] = useState("");
     const [email, setEmail] = useState("");
@@ -17,8 +16,10 @@ export function Registrar () {
     const [photo, setPhoto] = useState("");
     const [registrar, setRegistrar] = useState(false);
 
+    const token = useAuthEmail();
+
     let path = '/feed';
-    if (user) {
+    if (token) {
         navigate(path);
     }
 
