@@ -40,9 +40,9 @@ export function Feed () {
         let usuario!: string
 
         const configuration = {
-            url: `http://localhost:4000/api/users/${id}`,
+            url: `http://localhost:80/api/users/${id}`,
             method: 'GET',
-            port: 4000,
+            port: 80,
         };
         axios(configuration)
         .then((result) => {
@@ -59,9 +59,9 @@ export function Feed () {
         const userList: any = []
 
         const configuration = {
-            url: `http://localhost:4000/api/users/`,
+            url: `http://localhost:80/api/users/`,
             method: 'GET',
-            port: 4000,
+            port: 80,
         };
         axios(configuration)
         .then((result) => {
@@ -80,9 +80,9 @@ export function Feed () {
 
     function handleGetPost() {
         const configuration = {
-            url: "http://localhost:4000/api/postagens",
+            url: "http://localhost:80/api/postagens",
             method: 'GET',
-            port: '4000'
+            port: 80,
         };
         axios(configuration)
         .then((result) => {
@@ -111,7 +111,7 @@ export function Feed () {
         e.preventDefault();
         const configuration = {
             method: "post",
-            url: "http://localhost:4000/api/postagens",
+            url: "http://localhost:80/api/postagens",
             data: formData,
             headers: { "Content-Type": "multipart/form-data" },
         };
@@ -151,12 +151,12 @@ export function Feed () {
                     <div className='container-post container-fluid'>
                         <>
                             {posts.map((post, index) => <div key={index} className="key">
-                            <div className='userInfo'>{post.photo ? <img src={`http://localhost:4000/api/avatar/${post.photo}`} /> : <img className="img-fluid my-3" src={ProfilePicture}/>}
+                            <div className='userInfo'>{post.photo ? <img src={`http://localhost:80/api/avatar/${post.photo}`} /> : <img className="img-fluid my-3" src={ProfilePicture}/>}
                             <p className='postName'>{post.name}</p></div>
                             <p>{post.title}</p>
                             <p>{post.body}</p>
                             <p>{post.created.toString()}</p>
-                            <img id="postagemPhoto" src={`http://localhost:4000/api/postagens/${post.pathImage}`}/>
+                            <img id="postagemPhoto" src={`http://localhost:80/api/postagens/${post.pathImage}`}/>
                             </div>)}
                         </>
                     </div>

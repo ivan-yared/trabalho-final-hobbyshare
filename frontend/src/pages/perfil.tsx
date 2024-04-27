@@ -25,9 +25,9 @@ export function Perfil () {
         let usuario!: string
 
         const configuration = {
-            url: `http://localhost:4000/api/users/${id}`,
+            url: `http://localhost:80/api/users/${id}`,
             method: 'GET',
-            port: 4000,
+            port: 80,
         };
         axios(configuration)
         .then((result) => {
@@ -44,9 +44,9 @@ export function Perfil () {
         function handleGetPost() {
             const id = localStorage.getItem("id")
             const configuration = {
-                url: `http://localhost:4000/api/postagens/${id}`,
+                url: `http://localhost:80/api/postagens/${id}`,
                 method: 'GET',
-                port: '4000'
+                port: '80'
             };
             axios(configuration)
             .then((result) => {

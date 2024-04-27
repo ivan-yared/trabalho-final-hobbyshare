@@ -32,7 +32,8 @@ export function Registrar () {
         e.preventDefault()
         const configuration = {
             method: "post",
-            url: "http://localhost:4000/api/users/",
+            url: "http://localhost:80/api/users/",
+            port: 80,
             data: {
                 name,
                 email,

@@ -24,7 +24,8 @@ export function Login () {
         e.preventDefault();
         const configuration = {
             method: "post",
-            url: "http://localhost:4000/api/users/login",
+            url: "http://localhost:80/api/users/login",
+            port: 80,
             data: {
                 email,
                 password,
